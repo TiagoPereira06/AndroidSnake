@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cobra</string>
+    <string name="app_level">Nível</string>
+    <string name="cur_level_apples">Maçãs</string>
+    <string name="cur_level_score">Pontuação</string>
+    <string name="cur_level_gameover">Fim do Jogo</string>
+</resources>
