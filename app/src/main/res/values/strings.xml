@@ -4,5 +4,4 @@
     <string name="cur_level_apples">Apples</string>
     <string name="cur_level_score">Score</string>
     <string name="cur_level_gameover">Game Over</string>
-    <string name="level">Level</string>
 </resources>

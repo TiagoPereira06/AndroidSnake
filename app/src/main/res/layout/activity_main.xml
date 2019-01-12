@@ -7,51 +7,114 @@
     android:layout_height="match_parent"
     tools:context=".AndroidSnakeController">
 
-    <TextView
-        android:id="@+id/cur_apples"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:shadowColor="@android:color/holo_blue_dark"
-        android:text="@string/cur_level_apples"
-        app:layout_constraintStart_toEndOf="@+id/@string level"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/curr_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/level"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/curr_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:shadowColor="@android:color/holo_blue_dark"
-        android:text="@string/cur_level_score"
-        app:layout_constraintStart_toEndOf="@+id/cur_apples"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/textviewBig"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:background="@color/textviewSmall"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/app_level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cur_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/textviewBig"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:background="@color/textviewSmall"
+                android:text="@string/cur_level_apples"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="140dp" />
+
+            <TextView
+                android:id="@+id/curr_apples"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:background="@color/textviewBig"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:background="@color/textviewSmall"
+                android:text="@string/cur_level_score"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="215dp" />
+
+            <TextView
+                android:id="@+id/curr_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <pt.isel.poo.tile.TilePanel
         android:id="@+id/panel"
         android:layout_width="385dp"
         android:layout_height="364dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:gridLine="1"
-        app:heightTiles="4"
+        app:gridLine="0"
+        app:heightTiles="5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/@string level"
-        app:widthTiles="4" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:widthTiles="5" />
 
 </android.support.constraint.ConstraintLayout>
