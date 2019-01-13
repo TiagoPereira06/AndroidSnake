@@ -42,8 +42,7 @@
                 android:id="@+id/cur_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="2"/>
+                android:gravity="right" />
 
         </LinearLayout>
 
@@ -69,8 +68,7 @@
                 android:id="@+id/curr_apples"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="2" />
+                android:gravity="right" />
 
         </LinearLayout>
 
@@ -94,8 +92,7 @@
                 android:id="@+id/curr_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="2" />
+                android:gravity="right" />
 
         </LinearLayout>
 
