@@ -100,7 +100,6 @@ public class Level {
         currentGame.setScore(score);
         currentGame.setLevelNumber(levelNumber);
         moves = 0;
-
     }
 
     public void step() {

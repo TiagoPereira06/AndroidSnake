@@ -59,7 +59,7 @@ public class Loader {
                 char type = line.charAt(c);
                 if (type!=' ') {
                     Cell cell = createCell(type);
-                    model.putCell(l, c, cell);           // Add cell to the model
+                    model.putCell(c, l, cell);           // Add cell to the model
                 }
             }
         }
