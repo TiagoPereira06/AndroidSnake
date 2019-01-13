@@ -4,10 +4,7 @@ package g19.li21n.poo.isel.pt.androidsnake.view;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import g19.li21n.poo.isel.pt.androidsnake.AndroidSnakeController;
-import g19.li21n.poo.isel.pt.androidsnake.R;
 import pt.isel.poo.tile.Img;
-import pt.isel.poo.tile.Tile;
 
 public class ObstacleTile extends CellTile {
 

@@ -7,11 +7,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import g19.li21n.poo.isel.pt.androidsnake.model.*;
 import g19.li21n.poo.isel.pt.androidsnake.view.*;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -27,7 +27,7 @@ public class AndroidSnakeController extends Activity {
     private static Context  mContext;
     private Dir dir;
 
-    public static int STEP_TIME=500;                           // Milliseconds by step
+    public static int STEP_TIME = 500;                      // Milliseconds by step
     private long time;                                      // Current time for next step
     TextView currScore, currLevel, currApples;
     TilePanel panel;
@@ -47,33 +47,19 @@ public class AndroidSnakeController extends Activity {
                 if(dir!=null)
                     level.setSnakeDirection(dir);
                 panel.invalidate();
-                if(!level.isFinished()) level.step();
-                if (level.isFinished()&&!level.snakeIsDead()){
+                if(!level.isFinished())
+                    level.step();
+                if (level.isFinished() && !level.snakeIsDead()){
                     panel.removeHeartbeatListener();
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(AndroidSnakeController.this);
-                    builder.setMessage("Next Level")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    run();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                    */
+                    alertDialog("Level Terminated",false);
+
+                    // TODO: LOAD NEXT LVL
                 }
-                if (level.isFinished()&& level.snakeIsDead()){
+                if (level.snakeIsDead()){
                     panel.removeHeartbeatListener();
-/*                    AlertDialog.Builder builder = new AlertDialog.Builder(AndroidSnakeController.this);
-                    builder.setMessage("Game Over")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    finishAndRemoveTask();
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                    */
+                    alertDialog("Game Over",true);
                 }
+
 
 
 
@@ -82,7 +68,7 @@ public class AndroidSnakeController extends Activity {
         currScore = findViewById(R.id.curr_score);
         currLevel = findViewById(R.id.cur_level);
         currApples = findViewById(R.id.curr_apples);
-        //run();
+        run();
         loadInitialGame();
         panel.setListener(new OnTileTouchListener() {
             @Override
@@ -95,29 +81,26 @@ public class AndroidSnakeController extends Activity {
                 int difX = xFrom - xTo;
                 int difY = yFrom - yTo;
                 if (Math.abs(difX) > Math.abs(difY)) {
-                    if (difX > 0 )
-                        dir = Dir.LEFT;
-                    else
-                        dir = Dir.RIGHT;
-
-                } else {
-                    if (difY > 0 )
+                    if (difX > 0)
                         dir = Dir.UP;
                     else
                         dir = Dir.DOWN;
 
+                } else {
+                    if (difY > 0 )
+                        dir = Dir.LEFT;
+                    else
+                        dir = Dir.RIGHT;
                 }
                 return true;
             }
 
             @Override
             public void onDragEnd(int x, int y) {
-
             }
 
             @Override
             public void onDragCancel() {
-
             }
         });
 
@@ -136,13 +119,15 @@ public class AndroidSnakeController extends Activity {
             currLevel.setText(Integer.toString(level.getNumber()));                            // Update status View
             currApples.setText(Integer.toString(level.getRemainingApples()));
             currScore.setText(Integer.toString(model.getScore()));
-            while ((level = model.loadNextLevel() ) != null )       // Load currLevel model
-                /*if (!playLevel() || !win.question("Next Level"))*/ {  // Play currLevel
-                //TODO SUBSTITUIR WIN PARA LOG
-                   /* win.message("Bye.");*/
-                    return;
-                }
-            /*win.message("No more Levels");*/
+          // System.out.println("Antes do while");
+/*            while ((level = model.loadNextLevel() ) != null )  {     // Load level model
+                //if (!playLevel()) {  // Play level
+
+                return;
+                //}
+                // TODO: LOAD NEXT LEVEL
+            }*/
+            alertDialog("No More Levels! You won!!",true);
         } catch (Loader.LevelFormatException e) {
             /*win.message(e.getMessage());*/
             System.out.println(e+", Line "+e.getLineNumber()+": "+e.getLine());
@@ -156,31 +141,7 @@ public class AndroidSnakeController extends Activity {
      * Main loop of each currLevel.
      * @return true - the currLevel has been completed. false - the player has given up.
      */
-    private boolean playLevel() {
-        // Opens panel of tiles with dimensions appropriate to the current currLevel.
-        // Starts the viewer for each model cell.
-        // Shows the initial state of all cells in the model.
-        int height = level.getHeight(), width = level.getWidth();
-        panel.setSize(width,height);                                     // Create view for cells
-        //win.clear();                                                    // Clear area of previous Level
-        currLevel.setText(Integer.toString(level.getNumber()));                            // Update status View
-        currApples.setText(Integer.toString(level.getRemainingApples()));
-        currScore.setText(Integer.toString(model.getScore()));
-        for (int l = 0; l < height; l++)                                // Create each tile for each cell
-            for (int c = 0; c < width; c++) {
-                panel.setTile(l, c, CellTile.tileOf(level.getCell(l, c),this));
-                panel.invalidate(l, c);
-            }
 
-        level.setObserver(updater);                                     // Set listener of currLevel
-        time = System.currentTimeMillis();                              // Set step time
-        do
-            play();                                                      // Process keys and make a step
-        while ( !escaped && !level.isFinished() );
-        if (escaped || level.snakeIsDead()) return false;
-       /* win.message("You win");*/
-        return true;                   // Verify win conditions; false: finished without complete
-    }
 
     /**
      * Listener of model (Game and Level) to update View
@@ -188,7 +149,7 @@ public class AndroidSnakeController extends Activity {
     private class Updater implements Game.Listener, Level.Observer {
         // Game.Listener
         @Override
-        public void scoreUpdated(int score) { currScore.setText(Integer.toString(score)); }
+        public void scoreUpdated(int score) { currScore.setText(Integer.toString(model.getScore())); }
         // Level.Listener
         @Override
         public void cellUpdated(int l, int c, Cell cell) { panel.invalidate(l,c); }
@@ -204,42 +165,18 @@ public class AndroidSnakeController extends Activity {
             assert !(tile instanceof EmptyTile);
             panel.setTile(toL,toC,tile);
             cellRemoved(fromL,fromC);
+            scoreUpdated(model.getScore());
         }
         @Override
-        public void applesUpdated(int apples) { currApples.setText(Integer.toString(apples)); }
+        public void applesUpdated(int apples) {
+            currApples.setText(Integer.toString(apples));
+        }
     }
     private Updater updater = new Updater();
 
     /**
      * Process key pressed and makes one step.
      */
-    private void play() {
-       /* time += STEP_TIME;                  // Adjust step time
-        int key = getKeyPressed();          // Wait a step time and read a key
-        if (key > 0) {
-            Dir dir = null;
-            switch (key) {
-                case VK_UP: dir = Dir.UP; break;
-                case VK_DOWN: dir = Dir.DOWN; break;
-                case VK_LEFT: dir = Dir.LEFT; break;
-                case VK_RIGHT: dir = Dir.RIGHT; break;
-                case VK_ESCAPE: escaped=true; return;
-                case VK_PAUSE:
-                    paused = !paused;
-                    win.state(paused ? "PAUSED" : null);
-                    return;
-            }
-            if (dir!=null) level.setSnakeDirection(dir);
-        }
-        if (!paused){
-            level.step();
-            updateStatus();
-        }*/
-    }
-
-    private void updateStatus() {
-        currScore.setText(model.getScore());
-    }
 
 
     public static Context getContext() {
@@ -267,5 +204,18 @@ public class AndroidSnakeController extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void alertDialog(String msg, final boolean closeGame){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AndroidSnakeController.this);
+        builder.setMessage(msg)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (closeGame)
+                            finishAndRemoveTask();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

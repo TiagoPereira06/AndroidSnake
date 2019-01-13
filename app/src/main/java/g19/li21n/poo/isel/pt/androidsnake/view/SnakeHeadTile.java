@@ -4,12 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import g19.li21n.poo.isel.pt.androidsnake.AndroidSnakeController;
-import g19.li21n.poo.isel.pt.androidsnake.R;
 import g19.li21n.poo.isel.pt.androidsnake.model.Cell;
 import g19.li21n.poo.isel.pt.androidsnake.model.SnakeHeadCell;
-import g19.li21n.poo.isel.pt.androidsnake.model.Dir;
-import pt.isel.poo.tile.Img;
 
 
 public class SnakeHeadTile extends CellTile {

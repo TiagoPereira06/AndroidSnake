@@ -5,11 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import g19.li21n.poo.isel.pt.androidsnake.AndroidSnakeController;
-import g19.li21n.poo.isel.pt.androidsnake.R;
 import g19.li21n.poo.isel.pt.androidsnake.model.Cell;
-import pt.isel.poo.tile.Img;
-import pt.isel.poo.tile.Tile;
 
 public class SnakeBodyTile extends CellTile {
     private final Paint brush;

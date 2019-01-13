@@ -1,11 +1,8 @@
 package g19.li21n.poo.isel.pt.androidsnake.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
-import g19.li21n.poo.isel.pt.androidsnake.AndroidSnakeController;
 import g19.li21n.poo.isel.pt.androidsnake.R;
 import g19.li21n.poo.isel.pt.androidsnake.model.*;
 import pt.isel.poo.tile.Img;
@@ -32,6 +29,7 @@ public abstract class CellTile implements Tile {
     public static Tile tileOf(Cell cell, Context ctx) {
         element= cell;
         if (cell instanceof SnakeHeadCell) return new SnakeHeadTile(cell);
+        if (cell instanceof DeadSnakeHeadCell) return new DeadSnakeHeadTile(cell);
         if (cell instanceof SnakeBodyCell) return new SnakeBodyTile(cell);
         if (cell instanceof MouseCell) return new MouseTile(new Img(ctx,R.drawable.mouse));
         if (cell instanceof AppleCell) return new AppleTile(new Img(ctx, R.drawable.apple));
