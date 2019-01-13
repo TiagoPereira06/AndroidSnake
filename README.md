@@ -1,5 +1,5 @@
 # AndroidSnake
-Group Project 03 - JAVA
+Group Project 19 - JAVA
 
 PROJECT FOR EDUCATIONAL PURPOSES ONLY
 
