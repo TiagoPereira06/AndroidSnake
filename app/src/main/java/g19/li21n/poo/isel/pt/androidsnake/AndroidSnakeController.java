@@ -70,7 +70,6 @@ public class AndroidSnakeController extends Activity {
         currLevel = findViewById(R.id.cur_level);
         currApples = findViewById(R.id.curr_apples);
         loadInitialGame();
-        //run();
         panel.setListener(new OnTileTouchListener() {
             @Override
             public boolean onClick(int xTile, int yTile) {
