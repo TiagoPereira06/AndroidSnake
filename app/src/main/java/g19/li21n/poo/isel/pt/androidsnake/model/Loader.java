@@ -1,6 +1,5 @@
 package g19.li21n.poo.isel.pt.androidsnake.model;
 
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

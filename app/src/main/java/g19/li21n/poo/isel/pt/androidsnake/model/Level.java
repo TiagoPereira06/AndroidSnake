@@ -33,7 +33,7 @@ public class Level {
         setWidth(width);
         fillEmptyCells(board);
         setLevelNumber(levelNumber);
-        remApples = 10;
+        remApples = 4;
     }
 
     private void setLevelNumber(int levelNumber) {

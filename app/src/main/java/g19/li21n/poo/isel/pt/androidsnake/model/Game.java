@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Game {
-    private final InputStream input;
+    private InputStream input;
     private int score = 0;
     private int levelNumber = 0;
     private Level curLevel = null;
@@ -25,18 +25,16 @@ public class Game {
         input.mark(40*1024);
     }
 
-    public Level loadNextLevel() throws Loader.LevelFormatException {
-        try {
-            input.reset();
-            Scanner in = new Scanner(input);
-            curLevel = new Loader(in).load(++levelNumber);
-            if (curLevel!=null) {
-                curLevel.init(this);
-            }
-            return curLevel;
-        } catch (IOException e) {
-            throw new RuntimeException("IOException",e);
+    public Level loadNextLevel(InputStream levels) throws Loader.LevelFormatException {
+        //input.reset();
+        input = levels.markSupported() ? levels : new BufferedInputStream(levels);
+        input.mark(40*1024);
+        Scanner in = new Scanner(input);
+        curLevel = new Loader(in).load(++levelNumber);
+        if (curLevel!=null) {
+            curLevel.init(this);
         }
+        return curLevel;
     }
 
     public int getScore() { return score; }
